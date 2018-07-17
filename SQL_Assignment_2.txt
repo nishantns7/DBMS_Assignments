@@ -16,4 +16,62 @@ SELECT COUNT(film.film_id) AS "Documentaries with deleted scenes" FROM category,
 2. Find out the number of sci-fi movies rented by the store managed by Jon Stephens.
 
 
-SELECT COUNT(rental_id) FROM category, film_category, inventory, rental, staff, store WHERE category.category_id=film_category.category_id AND film_category.film_id=inventory.film_id AND inventory.inventory_id=rental.inventory_id AND rental.staff_id=store.manager_staff_id AND name="Sci-Fi" AND first_name="Jon" AND last_name="Stephens";
+SELECT COUNT(title) AS "Number of movies rented", COUNT(DISTINCT title) AS "Number of distinct titles rented" FROM store, staff, rental, inventory, film, film_category, category WHERE rental.inventory_id=inventory.inventory_id AND inventory.film_id=film.film_id AND film.film_id=film_category.film_id AND film_category.category_id=category.category_id AND name="Sci-Fi" AND film_category.film_id=film.film_id AND rental.staff_id=staff.staff_id AND staff.staff_id=store.manager_staff_id AND first_name="Jon" AND last_name="Stephens";
+
++-------------------------+----------------------------------+
+| Number of movies rented | Number of distinct titles rented |
++-------------------------+----------------------------------+
+|                     548 |                               59 |
++-------------------------+----------------------------------+
+1 row in set (0.01 sec)
+
+
+
+
+3. Find out the total sales from Animation movies.
+
+
+SELECT * FROM sales_by_film_category WHERE category="Animation";
+
++-----------+-------------+
+| category  | total_sales |
++-----------+-------------+
+| Animation |     4656.30 |
++-----------+-------------+
+1 row in set (0.07 sec)
+
+
+
+
+4. Find out the top 3 rented category of movies  by “PATRICIA JOHNSON”.
+
+
+SELECT category, COUNT(category) FROM film_list, customer, rental, inventory WHERE rental.customer_id=customer.customer_id AND first_name="Patricia" AND last_name="Johnson" AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_list.FID GROUP BY category ORDER BY COUNT(category) DESC LIMIT 3;
+
++-----------+-----------------+
+| category  | COUNT(category) |
++-----------+-----------------+
+| Sports    |               5 |
+| Classics  |               4 |
+| Animation |               3 |
++-----------+-----------------+
+3 rows in set (0.04 sec)
+
+
+
+
+5. Find out the number of R rated movies rented by “SUSAN WILSON”.
+
+
+SELECT category, COUNT(category) FROM film_list, customer, rental, inventory WHERE rental.customer_id=customer.customer_id AND first_name="Patricia" AND last_name="Johnson" AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_list.FID GROUP BY category ORDER BY COUNT(category) DESC LIMIT 3;
+
++---------------------------------+
+| Number of R rated movies rented |
++---------------------------------+
+|                               3 |
++---------------------------------+
+1 row in set (0.04 sec)
+
+
+
+
