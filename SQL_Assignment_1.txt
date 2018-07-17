@@ -1,0 +1,255 @@
+1. Find out the PG-13 rated comedy movies. DO NOT use the film_list table.
+
+
+SELECT title FROM film,film_category WHERE film.film_id=film_category.film_id AND category_id=5 and rating="PG-13";
+
++-------------------------+
+| title                   |
++-------------------------+
+| AIRPLANE SIERRA         |
+| ANTHEM LUKE             |
+| FLINTSTONES HAPPINESS   |
+| FREEDOM CLEOPATRA       |
+| GROUNDHOG UNCUT         |
+| KNOCK WARLOCK           |
+| PARADISE SABRINA        |
+| PERFECT GROOVE          |
+| RUSHMORE MERMAID        |
+| SADDLE ANTITRUST        |
+| STRICTLY SCARFACE       |
+| TRAINSPOTTING STRANGERS |
++-------------------------+
+12 rows in set (0.00 sec)
+
+
+
+
+2. Find out the top 3 rented horror movies.
+
+
+SELECT title, COUNT(title) FROM rental, inventory, film, film_category WHERE rental.inventory_id=inventory.inventory_id AND inventory.film_id=film.film_id AND film.film_id=film_category.film_id AND category_id=11 GROUP BY title ORDER BY COUNT(title) DESC LIMIT 3;
+
++--------------+--------------+
+| title        | COUNT(title) |
++--------------+--------------+
+| PULP BEVERLY |           30 |
+| FAMILY SWEET |           29 |
+| SWARM GOLD   |           27 |
++--------------+--------------+
+3 rows in set (0.01 sec)
+
+
+
+
+3. Find out the list of customers from India who have rented sports movies.
+
+
+SELECT customer.first_name, customer.last_name FROM customer, rental, inventory, film_category, category, staff, store, address, city, country WHERE customer.customer_id=rental.customer_id AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_category.film_id AND film_category.category_id=category.category_id AND rental.staff_id=staff.staff_id AND staff.store_id=store.store_id AND store.address_id=address.address_id AND address.city_id=city.city_id AND city.country_id=country.country_id AND country="India" AND name="Sports";
+
+Empty set (0.00 sec)
+
+
+
+
+4. Find out the list of customers from Canada who have rented “NICK WAHLBERG” movies.
+
+
+SELECT customer.first_name, customer.last_name FROM customer, rental, inventory, film_actor, actor, staff, store, address, city, country WHERE customer.customer_id=rental.customer_id AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_actor.film_id AND film_actor.actor_id=actor.actor_id AND rental.staff_id=staff.staff_id AND staff.store_id=store.store_id AND store.address_id=address.address_id AND address.city_id=city.city_id AND city.country_id=country.country_id AND country="Canada" AND actor.first_name="Nick" AND actor.last_name="Wahlberg";
+
++------------+-------------+
+| first_name | last_name   |
++------------+-------------+
+| CASSANDRA  | WALTERS     |
+| DEBORAH    | WALKER      |
+| ROBIN      | HAYES       |
+| MARY       | SMITH       |
+| ROSE       | HOWARD      |
+| STEVEN     | CURLEY      |
+| MARION     | SNYDER      |
+| JANICE     | WARD        |
+| JOANNE     | ROBERTSON   |
+| MICHAEL    | SILVERMAN   |
+| RAMON      | CHOATE      |
+| JIM        | REA         |
+| CHARLENE   | ALVAREZ     |
+| RICK       | MATTOX      |
+| MANUEL     | MURRELL     |
+| FRANCISCO  | SKIDMORE    |
+| MARLENE    | WELCH       |
+| KURT       | EMMONS      |
+| GINA       | WILLIAMSON  |
+| GILBERT    | SLEDGE      |
+| LORETTA    | CARPENTER   |
+| BRANDON    | HUEY        |
+| ANA        | BRADLEY     |
+| GLADYS     | HAMILTON    |
+| JAY        | ROBB        |
+| VIRGIL     | WOFFORD     |
+| JOYCE      | EDWARDS     |
+| CHRIS      | BROTHERS    |
+| FRED       | WHEAT       |
+| DUSTIN     | GILLETTE    |
+| DEBRA      | NELSON      |
+| FELICIA    | SUTTON      |
+| JOSEPH     | JOY         |
+| MARGIE     | WADE        |
+| MATTHEW    | MAHAN       |
+| MARJORIE   | TUCKER      |
+| CORY       | MEEHAN      |
+| CAROLE     | BARNETT     |
+| MARIO      | CHEATHAM    |
+| JESSE      | SCHILLING   |
+| JOANNE     | ROBERTSON   |
+| ERIN       | DUNN        |
+| RICKY      | SHELBY      |
+| MELISSA    | KING        |
+| MORRIS     | MCCARTER    |
+| DANA       | HART        |
+| WALLACE    | SLONE       |
+| WESLEY     | BULL        |
+| JAMIE      | RICE        |
+| ARNOLD     | HAVENS      |
+| KARL       | SEAL        |
+| WALLACE    | SLONE       |
+| SHIRLEY    | ALLEN       |
+| ANDRE      | RAPP        |
+| TIMOTHY    | BUNN        |
+| HOWARD     | FORTNER     |
+| CLIFTON    | MALCOLM     |
+| VIOLA      | HANSON      |
+| MICHELLE   | CLARK       |
+| NANCY      | THOMAS      |
+| TYRONE     | ASHER       |
+| HOWARD     | FORTNER     |
+| SIDNEY     | BURLESON    |
+| VICTOR     | BARKLEY     |
+| EVELYN     | MORGAN      |
+| KURT       | EMMONS      |
+| DARRELL    | POWER       |
+| FRED       | WHEAT       |
+| WENDY      | HARRISON    |
+| CRAIG      | MORRELL     |
+| ELIZABETH  | BROWN       |
+| WESLEY     | BULL        |
+| GREGORY    | MAULDIN     |
+| DARRYL     | ASHCRAFT    |
+| AMANDA     | CARTER      |
+| CHRIS      | BROTHERS    |
+| DAVE       | GARDINER    |
+| MARILYN    | ROSS        |
+| SARA       | PERRY       |
+| LANCE      | PEMBERTON   |
+| OLGA       | JIMENEZ     |
+| LILLIAN    | GRIFFIN     |
+| JOE        | GILLILAND   |
+| JEFF       | EAST        |
+| SEAN       | DOUGLASS    |
+| DANA       | HART        |
+| ESTHER     | CRAWFORD    |
+| MIRIAM     | MCKINNEY    |
+| BERNICE    | WILLIS      |
+| DENISE     | KELLY       |
+| BECKY      | MILES       |
+| GWENDOLYN  | MAY         |
+| BESSIE     | MORRISON    |
+| EMMA       | BOYD        |
+| DARRYL     | ASHCRAFT    |
+| WILLIAM    | SATTERFIELD |
+| KRISTINA   | CHAMBERS    |
+| SUE        | PETERS      |
+| ERIKA      | PENA        |
+| SONIA      | GREGORY     |
+| ANA        | BRADLEY     |
+| DONNA      | THOMPSON    |
+| VINCENT    | RALSTON     |
+| CHRISTIAN  | JUNG        |
+| ERIK       | GUILLEN     |
+| FERNANDO   | CHURCHILL   |
+| HOLLY      | FOX         |
+| WALTER     | PERRYMAN    |
+| JAIME      | NETTLES     |
+| JESSE      | SCHILLING   |
+| GUY        | BROWNLEE    |
+| PATRICK    | NEWSOM      |
+| TOM        | MILNER      |
+| JAMES      | GANNON      |
+| SHANNON    | FREEMAN     |
+| JESSIE     | MILAM       |
+| KAY        | CALDWELL    |
+| CONNIE     | WALLACE     |
+| JORGE      | OLIVARES    |
+| MATTHEW    | MAHAN       |
+| LORRAINE   | STEPHENS    |
+| CRYSTAL    | FORD        |
+| ELAINE     | STEVENS     |
+| WILLIAM    | SATTERFIELD |
+| WESLEY     | BULL        |
+| FERNANDO   | CHURCHILL   |
+| JEFFERY    | PINSON      |
+| MARIAN     | MENDOZA     |
+| RANDY      | GAITHER     |
+| DAWN       | SULLIVAN    |
+| SHELLY     | WATTS       |
+| DIANE      | COLLINS     |
+| AGNES      | BISHOP      |
+| DON        | BONE        |
+| LYNN       | PAYNE       |
+| VICTORIA   | GIBSON      |
+| SALLY      | PIERCE      |
+| TRACY      | HERRMANN    |
+| WILLIE     | HOWELL      |
+| LAURIE     | LAWRENCE    |
+| ANDRE      | RAPP        |
+| FLORENCE   | WOODS       |
+| THELMA     | MURRAY      |
+| JOAN       | COOPER      |
+| VICTOR     | BARKLEY     |
+| CARLOS     | COUGHLIN    |
+| MILTON     | HOWLAND     |
+| ANTONIO    | MEEK        |
+| KIRK       | STCLAIR     |
+| CLARA      | SHAW        |
+| CARLOS     | COUGHLIN    |
+| MARION     | OCAMPO      |
+| SAMANTHA   | DUNCAN      |
+| DEBORAH    | WALKER      |
+| GABRIEL    | HARDER      |
+| ROSEMARY   | SCHMIDT     |
+| ALICE      | STEWART     |
+| NATALIE    | MEYER       |
+| JOE        | GILLILAND   |
+| LEONA      | OBRIEN      |
+| JUSTIN     | NGO         |
+| LOUIS      | LEONE       |
+| FERNANDO   | CHURCHILL   |
+| SERGIO     | STANFIELD   |
+| NATHANIEL  | ADAM        |
+| SAMANTHA   | DUNCAN      |
+| TONI       | HOLT        |
+| MELISSA    | KING        |
+| JULIAN     | VEST        |
+| FELICIA    | SUTTON      |
+| MAURICE    | CRAWLEY     |
+| RONALD     | WEINER      |
++------------+-------------+
+172 rows in set (0.07 sec)
+
+
+
+
+5. Find out the number of movies in which “SEAN WILLIAMS” acted.
+
+
+SELECT first_name, last_name, COUNT(film_id) AS "Number of films" FROM actor, film_actor WHERE actor.actor_id=film_actor.actor_id AND first_name="Sean" AND last_name="Williams";
+
++------------+-----------+-----------------+
+| first_name | last_name | Number of films |
++------------+-----------+-----------------+
+| SEAN       | WILLIAMS  |              26 |
++------------+-----------+-----------------+
+1 row in set (0.00 sec)
+
+
+
+
+

@@ -1,0 +1,19 @@
+1. Find out the number of documentaries with deleted scenes.	
+
+
+SELECT COUNT(film.film_id) AS "Documentaries with deleted scenes" FROM category, film_category, film WHERE category.category_id=film_category.category_id AND film_category.film_id=film.film_id AND name="Documentary" AND special_features LIKE "%Deleted Scenes%";
+
++-----------------------------------+
+| Documentaries with deleted scenes |
++-----------------------------------+
+|                                34 |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+
+
+
+2. Find out the number of sci-fi movies rented by the store managed by Jon Stephens.
+
+
+SELECT COUNT(rental_id) FROM category, film_category, inventory, rental, staff, store WHERE category.category_id=film_category.category_id AND film_category.film_id=inventory.film_id AND inventory.inventory_id=rental.inventory_id AND rental.staff_id=store.manager_staff_id AND name="Sci-Fi" AND first_name="Jon" AND last_name="Stephens";
