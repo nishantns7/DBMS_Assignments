@@ -44,9 +44,63 @@ SELECT title, COUNT(title) FROM rental, inventory, film, film_category WHERE ren
 3. Find out the list of customers from India who have rented sports movies.
 
 
-SELECT customer.first_name, customer.last_name FROM customer, rental, inventory, film_category, category, staff, store, address, city, country WHERE customer.customer_id=rental.customer_id AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_category.film_id AND film_category.category_id=category.category_id AND rental.staff_id=staff.staff_id AND staff.store_id=store.store_id AND store.address_id=address.address_id AND address.city_id=city.city_id AND city.country_id=country.country_id AND country="India" AND name="Sports";
+SELECT DISTINCT customer.first_name, customer.last_name FROM customer, rental, inventory, film_category, category, address, city, country WHERE customer.customer_id=rental.customer_id AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_category.film_id AND film_category.category_id=category.category_id AND customer.address_id=address.address_id AND address.city_id=city.city_id AND city.country_id=country.country_id AND country="India" AND name="Sports";
 
-Empty set (0.00 sec)
++------------+-------------+
+| first_name | last_name   |
++------------+-------------+
+| ADAM       | GOOCH       |
+| SHERRI     | RHODES      |
+| ANNETTE    | OLSON       |
+| ARLENE     | HARVEY      |
+| CHRISTIAN  | JUNG        |
+| LUCY       | WHEELER     |
+| CARLOS     | COUGHLIN    |
+| TONYA      | CHAPMAN     |
+| HELEN      | HARRIS      |
+| TIM        | CARY        |
+| SALLY      | PIERCE      |
+| BERNARD    | COLBY       |
+| JOSEPHINE  | GOMEZ       |
+| LAURIE     | LAWRENCE    |
+| EDITH      | MCDONALD    |
+| WAYNE      | TRUONG      |
+| HOLLY      | FOX         |
+| LENA       | JENSEN      |
+| ALLEN      | BUTTERFIELD |
+| ANITA      | MORALES     |
+| MILDRED    | BAILEY      |
+| AMY        | LOPEZ       |
+| PEARL      | GARZA       |
+| NAOMI      | JENNINGS    |
+| CHAD       | CARBONE     |
+| PENNY      | NEAL        |
+| STEVEN     | CURLEY      |
+| CYNTHIA    | YOUNG       |
+| CHERYL     | MURPHY      |
+| NINA       | SOTO        |
+| JOHN       | FARNSWORTH  |
+| PAULA      | BRYANT      |
+| RAMONA     | HALE        |
+| LEE        | HAWKS       |
+| JUANITA    | MASON       |
+| BRADLEY    | MOTLEY      |
+| LORI       | WOOD        |
+| DWAYNE     | OLVERA      |
+| JOSHUA     | MARK        |
+| SAMUEL     | MARLOW      |
+| GERALD     | FULTZ       |
+| NICOLE     | PETERSON    |
+| BRETT      | CORNWELL    |
+| BEATRICE   | ARNOLD      |
+| THEODORE   | CULP        |
+| GEORGIA    | JACOBS      |
+| MIKE       | WAY         |
+| SHANNON    | FREEMAN     |
+| MILTON     | HOWLAND     |
+| NANCY      | THOMAS      |
++------------+-------------+
+50 rows in set (0.01 sec)
 
 
 
