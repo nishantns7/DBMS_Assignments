@@ -63,7 +63,7 @@ SELECT category, COUNT(category) FROM film_list, customer, rental, inventory WHE
 5. Find out the number of R rated movies rented by “SUSAN WILSON”.
 
 
-SELECT category, COUNT(category) FROM film_list, customer, rental, inventory WHERE rental.customer_id=customer.customer_id AND first_name="Patricia" AND last_name="Johnson" AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_list.FID GROUP BY category ORDER BY COUNT(category) DESC LIMIT 3;
+SELECT COUNT(rental_id) AS "Number of R rated movies rented" FROM film_list, customer, rental, inventory WHERE rental.customer_id=customer.customer_id AND first_name="Susan" AND last_name="Wilson" AND rental.inventory_id=inventory.inventory_id AND inventory.film_id=film_list.FID AND rating="R";
 
 +---------------------------------+
 | Number of R rated movies rented |
